@@ -4,7 +4,6 @@ import CategoryButton from "./components/CategoryButton";
 import categories from "./fake-data/all-categories";
 import products from "./fake-data/all-products";
 
-
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -12,18 +11,20 @@ const App = () => {
     <div className="container">
       <h1 className="page-title">Products</h1>
       <div className="category-container">
-      <CategoryButton
-            onPress={() => {
-              setSelectedCategory('');
-            }}
-            categoryName='All Products'
-            />
+        <CategoryButton
+          onPress={() => {
+            setSelectedCategory("");
+          }}
+          categoryName="All Products"
+          isActive={selectedCategory === ""}
+        />
         {categories.map((category) => (
           <CategoryButton
             onPress={() => {
               setSelectedCategory(category);
             }}
             categoryName={category}
+            isActive={category === selectedCategory}
           />
         ))}
       </div>
@@ -39,8 +40,8 @@ const App = () => {
           if (product.category === selectedCategory) {
             return (
               <div className="item">
-              <ProductCard imageUrl={product.image} title={product.title} />
-            </div>
+                <ProductCard imageUrl={product.image} title={product.title} />
+              </div>
             );
           }
         })}
